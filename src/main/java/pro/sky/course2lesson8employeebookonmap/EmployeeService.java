@@ -2,7 +2,9 @@ package pro.sky.course2lesson8employeebookonmap;
 
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 @Service
@@ -10,15 +12,15 @@ public class EmployeeService {
 
     private final int maxPersonnelNumber;
 
-    private final Set<Employee> employeeList;
+    private HashMap<String, Employee> employeeList;
 
     public EmployeeService() {
-        employeeList = new HashSet<>();
+        employeeList = new HashMap<>();
         maxPersonnelNumber = 100;
     }
 
     public EmployeeService(int maxPersonnelNumber) {
-        employeeList = new HashSet<>();
+        employeeList = new HashMap<>();
         this.maxPersonnelNumber = maxPersonnelNumber;
     }
 
@@ -31,7 +33,7 @@ public class EmployeeService {
     }
 
     public boolean findEmployeeBoolean(String firstname, String lastname) {
-        if (employeeList.contains(new Employee(firstname, lastname, "error"))) {
+        if (employeeList.containsKey(firstname + lastname)) {
             return true;
         } else {
             throw new EmployeeNotFoundException();
@@ -63,7 +65,7 @@ public class EmployeeService {
             throw new WrongNameFormatException(nameCheck.getMessage());
         }
 
-        if (employeeList.remove(employee)) {
+        if (employeeList.remove(employee.getKey(), employee)) {
             return employee;
         } else {
             throw new EmployeeNotFoundException("... this person has is not hired yet");
@@ -100,15 +102,13 @@ public class EmployeeService {
 
         Employee employee = new Employee(firstName, lastName, "enrolled");
 
-        if (employeeList.add(employee)) {
-            return employee;
-        } else {
-            throw new EmployeeAlreadyAddedException("already hired");
-        }
+        employeeList.put(employee.getFirstName() + employee.getLastName(), employee);
+
+        return employee;
     }
 
 
-    public Set<Employee> getEmployeeList() {
+    public HashMap<String, Employee> getEmployeeList() {
         return employeeList;
     }
 
