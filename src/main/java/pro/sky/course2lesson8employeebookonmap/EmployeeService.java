@@ -3,9 +3,6 @@ package pro.sky.course2lesson8employeebookonmap;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 @Service
 public class EmployeeService {
@@ -73,7 +70,7 @@ public class EmployeeService {
     }
 
     public String welcome() {
-        return "<h2>Welcome to homework Sets for Course 2 Lesson 6 ))</h2><br><br>" +
+        return "<h2>Welcome to homework Sets for Course 2 Lesson 8 ))</h2><br><br>" +
                 "<a href=\"http://localhost:8080/employee/add/?firstName=John&lastName=Smith\"> Add employee John Smith </a> | " +
                 "<a href=\"http://localhost:8080/employee/remove/?firstName=John&lastName=Smith\"> Remove employee John Smith </a> | " +
                 "<a href=\"http://localhost:8080/employee/find/\"> Find employee </a> | " +
@@ -112,7 +109,7 @@ public class EmployeeService {
         return employeeList;
     }
 
-    class NameCheck {
+    static class NameCheck {
 
         private final String firstName;
         private final String lastName;
