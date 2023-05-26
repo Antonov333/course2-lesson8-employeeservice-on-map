@@ -34,6 +34,10 @@ public class Employee {
         this.status = status;
     }
 
+    public String getKey() {
+        return firstName + lastName;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) return true;
