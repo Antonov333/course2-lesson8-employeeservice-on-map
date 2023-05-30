@@ -109,6 +109,10 @@ public class EmployeeService {
         return employeeList;
     }
 
+    public String departments() {
+        return "Under construction, sorry";
+    }
+
     static class NameCheck {
 
         private final String firstName;

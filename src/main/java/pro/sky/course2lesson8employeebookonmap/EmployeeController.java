@@ -76,4 +76,9 @@ public class EmployeeController {
         return employeeService.welcome();
     }
 
+    @GetMapping(path = "/departments")
+    public String depts() {
+        return employeeService.departments();
+    }
+
 }
