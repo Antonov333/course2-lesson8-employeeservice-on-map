@@ -3,8 +3,9 @@ package pro.sky.course2lesson8employeebookonmap;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Objects;
 
-@Service
+//@Service
 public class EmployeeService {
 
     private final int maxPersonnelNumber;
@@ -86,7 +87,7 @@ public class EmployeeService {
         }
 
         if (getPersonnelNumber() >= getMaxPersonnelNumber()) {
-            throw new EmployeeStorageIsFullException("Personal array is full. No vacant position at the moment");
+            throw new EmployeeStorageIsFullException("Personnel array is full. No vacant position at the moment");
         }
 
         try {
@@ -99,7 +100,7 @@ public class EmployeeService {
 
         Employee employee = new Employee(firstName, lastName, "enrolled");
 
-        employeeList.put(employee.getFirstName() + employee.getLastName(), employee);
+        employeeList.put(employee.getKey(), employee);
 
         return employee;
     }
@@ -165,5 +166,6 @@ public class EmployeeService {
         }
 
     }
+
 
 }

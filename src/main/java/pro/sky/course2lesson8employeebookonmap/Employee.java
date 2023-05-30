@@ -5,6 +5,8 @@ import java.util.Objects;
 public class Employee {
     private final String firstName;
     private final String lastName;
+    private long salary;
+    private int deptId;
     private String status;
 
     public String toString() {
@@ -32,6 +34,16 @@ public class Employee {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
+        this.deptId = 0;
+        this.salary = 0;
+    }
+
+    public Employee(String firstName, String lastName, String status, int deptId, long salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.deptId = deptId;
+        this.salary = salary;
     }
 
     public String getKey() {

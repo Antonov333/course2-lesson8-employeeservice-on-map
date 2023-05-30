@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Set;
 
-@RestController
+//@RestController
 @RequestMapping("/employee")
 public class EmployeeController {
 
