@@ -9,11 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/departments")
 public class EmployeeStreamController {
 
-    EmployeeStreamService employeeService = new EmployeeStreamService();
+    EmployeeStreamService streamService = new EmployeeStreamService(3);
+
 
     @GetMapping()
     public String welcome() {
-        return employeeService.welcome();
+        return streamService.welcome();
     }
+
+    @GetMapping(path = "/max-salary")
+    public String maxSalary() {
+        return streamService.maxSalary();
+    }
+
 
 }
