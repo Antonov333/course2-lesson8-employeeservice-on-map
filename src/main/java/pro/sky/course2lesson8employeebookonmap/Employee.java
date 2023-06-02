@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Employee implements Comparable<Employee> {
     private final String firstName;
     private final String lastName;
-    private int salary;
-    private int deptId;
+    private final int salary;
+    private final int deptId;
     private String status;
 
     public String toString() {
@@ -78,8 +78,8 @@ public class Employee implements Comparable<Employee> {
 
     @Override
     public int compareTo(Employee o) {
-        Integer thisDeptId = new Integer(deptId);
-        Integer otherDeptId = new Integer(o.getDeptId());
+        Integer thisDeptId = Integer.valueOf(deptId);
+        Integer otherDeptId = Integer.valueOf(o.getDeptId());
         return thisDeptId.compareTo(otherDeptId);
     }
 }

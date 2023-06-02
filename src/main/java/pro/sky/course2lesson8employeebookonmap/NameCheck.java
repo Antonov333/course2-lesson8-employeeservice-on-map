@@ -6,7 +6,7 @@ public class NameCheck {
     private final String lastName;
     private int code;
     private String message;
-    private boolean ok;
+    private final boolean ok;
 
     public NameCheck(String firstName, String lastName) {
         this.firstName = firstName;

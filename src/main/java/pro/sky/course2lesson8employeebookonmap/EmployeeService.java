@@ -3,14 +3,13 @@ package pro.sky.course2lesson8employeebookonmap;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 @Service
 public class EmployeeService {
 
     private final int maxPersonnelNumber;
 
-    private HashMap<String, Employee> employeeList;
+    private final HashMap<String, Employee> employeeList;
 
     public EmployeeService() {
         employeeList = new HashMap<>();
@@ -113,8 +112,6 @@ public class EmployeeService {
     public String departments() {
         return "Under construction, sorry";
     }
-
-
 
 
 }

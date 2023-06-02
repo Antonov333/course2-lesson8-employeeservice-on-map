@@ -1,11 +1,12 @@
 package pro.sky.course2lesson8employeebookonmap;
 
 import org.springframework.stereotype.Service;
-import org.springframework.util.comparator.Comparators;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class EmployeeStreamService {
@@ -14,7 +15,7 @@ public class EmployeeStreamService {
 
     private int personnelCount = 0;
 
-    private List<Employee> employeeList = new ArrayList<>();
+    private final List<Employee> employeeList = new ArrayList<>();
 
     public EmployeeStreamService() {
     }
@@ -38,7 +39,6 @@ public class EmployeeStreamService {
         if (!nameCheck.isOk()) {
             throw new WrongNameFormatException();
         }
-        ;
 
         if (personnelCount >= maxPersonnelNumber) {
             throw new EmployeeStorageIsFullException();
@@ -111,7 +111,7 @@ public class EmployeeStreamService {
             return "no personnel hired";
         }
         deptCrewResult.sort(Comparator.comparingInt(employee -> employee.getSalary()));
-        return deptCrewResult.get(0).getSalary() + "<br><br>" + deptCrewResult.toString();
+        return deptCrewResult.get(0).getSalary() + "<br><br>" + deptCrewResult;
 
     }
 
