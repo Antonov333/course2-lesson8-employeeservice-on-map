@@ -4,11 +4,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeStreamService {
 
     private int maxPersonnelNumber = 100;
+
+    private int personnelCount = 0;
 
     private List<Employee> employeeList = new ArrayList<>();
 
@@ -29,13 +33,51 @@ public class EmployeeStreamService {
 
     // !! make method to hire some exmaple employees
 
-    public Employee hire(String firstName, String lastName, int deptId, long salary) {
+    public Employee hire(String firstName, String lastName, int deptId, int salary) {
 
-        Employee employee = new Employee(firstName, lastName, "enrolled");
+        NameCheck nameCheck = new NameCheck(firstName, lastName);
 
-        return employee;
+        if (!nameCheck.isOk()) {
+            throw new WrongNameFormatException();
+        }
+        ;
+
+        if (personnelCount >= maxPersonnelNumber) {
+            throw new EmployeeStorageIsFullException();
+        } else {
+            personnelCount++;
+        }
+
+        Employee employee = new Employee(firstName, lastName, Status.hired, deptId, salary);
+
+        if (findEmployee(employee)) {
+            throw new EmployeeAlreadyAddedException();
+        }
+
+        boolean add = employeeList.add(employee);
+
+        Employee e = employeeList.get(personnelCount - 1);
+
+        return e;
     }
 
+    public List<Employee> exampleHiring() {
+        Random r = new Random();
+        hire("John", "Smith", 5, r.nextInt(50000, 100000));
+        hire("Pamela", "Anderson", 5, r.nextInt(50000, 100000));
+        hire("Tommy", "Lee", 5, r.nextInt(50000, 100000));
+        hire("Till", "Shweiger", 5, r.nextInt(50000, 100000));
+        hire("Ann", "Brown", 2, r.nextInt(50000, 100000));
+        hire("Ron", "Grownship", 2, r.nextInt(50000, 100000));
+        hire("James", "Alarmson", 2, r.nextInt(50000, 100000));
+        return employeeList;
+
+    }
+
+    private boolean findEmployee(Employee employee) {
+        boolean result = employeeList.contains(employee);
+        return result;
+    }
 
     public String welcome() {
         return "<h2> Course 2, Lesson 9: Stream and Optional<br><br>"
@@ -44,8 +86,17 @@ public class EmployeeStreamService {
         // !! make hint for /deparments/max-salary and other commands !!
     }
 
-    public String maxSalary() {
-        return "Under construction";
+    public String maxSalary(int deptId) {
+        return "deptId: " + Integer.valueOf(deptId).toString() + "<br>Sorry! maxSalary method is under construction";
+    }
+
+    public List<Employee> getDeptCrew(Integer dept) {
+        if (dept == null) {
+            return employeeList;
+        }
+        List<Employee> deptCrew = employeeList.stream().filter(employee -> employee.isDeptId(dept)).
+                collect(Collectors.toList());
+        return deptCrew;
     }
 /**
  public void printDeptCrews() {

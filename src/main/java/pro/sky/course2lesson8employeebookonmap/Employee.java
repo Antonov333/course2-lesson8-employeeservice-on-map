@@ -5,12 +5,12 @@ import java.util.Objects;
 public class Employee {
     private final String firstName;
     private final String lastName;
-    private long salary;
+    private int salary;
     private int deptId;
     private String status;
 
     public String toString() {
-        return firstName + " " + lastName;
+        return firstName + " " + lastName + " " + status + " DeptNo: " + deptId + " Salary: " + salary;
     }
 
     public String getFirstName() {
@@ -22,7 +22,6 @@ public class Employee {
     }
 
     public String getStatus() {
-
         return status;
     }
 
@@ -38,7 +37,7 @@ public class Employee {
         this.salary = 0;
     }
 
-    public Employee(String firstName, String lastName, String status, int deptId, long salary) {
+    public Employee(String firstName, String lastName, String status, int deptId, int salary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
@@ -48,6 +47,10 @@ public class Employee {
 
     public String getKey() {
         return firstName + lastName;
+    }
+
+    public boolean isDeptId(int deptId) {
+        return (deptId == this.deptId);
     }
 
     @Override
