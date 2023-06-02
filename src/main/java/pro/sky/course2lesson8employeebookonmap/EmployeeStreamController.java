@@ -31,9 +31,14 @@ public class EmployeeStreamController {
         return streamService.getEmployeeList();
     }
 
+    @GetMapping(path = "/min-salary")
+    public String minSalary(@RequestParam(required = false, name = "departmentId") Integer deptId) {
+        return streamService.minSalary(deptId);
+    }
+
     @GetMapping(path = "/max-salary")
-    public String maxSalary() {
-        return streamService.maxSalary(5);
+    public String maxSalary(@RequestParam(required = false, name = "departmentId") Integer deptId) {
+        return streamService.maxSalary(deptId);
     }
 
     @GetMapping(path = "/all")

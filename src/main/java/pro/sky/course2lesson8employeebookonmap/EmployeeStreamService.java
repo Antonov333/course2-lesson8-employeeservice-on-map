@@ -1,11 +1,11 @@
 package pro.sky.course2lesson8employeebookonmap;
 
 import org.springframework.stereotype.Service;
+import org.springframework.util.comparator.Comparators;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class EmployeeStreamService {
@@ -50,7 +50,7 @@ public class EmployeeStreamService {
 
         Employee employee = new Employee(firstName, lastName, Status.hired, deptId, salary);
 
-        if (findEmployee(employee)) {
+        if (isHired(employee)) {
             throw new EmployeeAlreadyAddedException();
         }
 
@@ -74,27 +74,54 @@ public class EmployeeStreamService {
 
     }
 
-    private boolean findEmployee(Employee employee) {
+    private boolean isHired(Employee employee) {
         boolean result = employeeList.contains(employee);
         return result;
     }
 
     public String welcome() {
-        return "<h2> Course 2, Lesson 9: Stream and Optional<br><br>"
+        return "<h2> Course 2, Lesson 9: Stream and Optional<br><br></h2>"
 
-                + "Under construction, sorry</h2>";
+                + "Under construction, sorry<br><br><a href=\"http://localhost:8080/departments/\"> Departments </a>";
         // !! make hint for /deparments/max-salary and other commands !!
     }
 
-    public String maxSalary(int deptId) {
-        return "deptId: " + Integer.valueOf(deptId).toString() + "<br>Sorry! maxSalary method is under construction";
+    public String maxSalary(Integer deptId) {
+
+        List<Employee> deptCrewResult = getDeptCrew(deptId);
+        if (deptCrewResult == null) {
+            return "no personnel hired";
+        }
+
+        List<Integer> salaries = new ArrayList<>();
+        salaries = deptCrewResult.stream().map(employee -> employee.getSalary()).collect(Collectors.toList());
+        salaries.sort(Comparator.reverseOrder());
+        return salaries.get(0) + " --- " + deptCrewResult;
+    }
+
+    public String minSalary(Integer deptId) {
+
+        List<Employee> deptCrewResult = getDeptCrew(deptId);
+
+        if (deptCrewResult == null) {
+            return "no personnel hired";
+        }
+        deptCrewResult.sort(Comparator.comparingInt(employee -> employee.getSalary()));
+        return "! " + deptCrewResult.get(0) + " ! " deptCrewResult.toString();
+
     }
 
     public List<Employee> getDeptCrew(Integer dept) {
+
         if (dept == null) {
-            return employeeList;
+            List<Employee> crewSortedByDept = new ArrayList<>();
+            crewSortedByDept = employeeList.stream().sorted().collect(Collectors.toList());
+            ;
+            return crewSortedByDept;
         }
-        List<Employee> deptCrew = employeeList.stream().filter(employee -> employee.isDeptId(dept)).
+        List<Employee> deptCrew = employeeList.stream().filter(employee -> {
+                    return employee.isDeptId(dept);
+                }).
                 collect(Collectors.toList());
         return deptCrew;
     }
