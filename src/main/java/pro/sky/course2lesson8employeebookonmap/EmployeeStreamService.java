@@ -100,7 +100,7 @@ public class EmployeeStreamService {
         }
 
         deptCrewResult.sort(Comparator.comparingInt(employee -> employee.getSalary()));
-        return deptCrewResult.get(deptCrewResult.size() - 1).getSalary() + "<br><br>" + deptCrewResult;
+        return deptCrewResult.get(deptCrewResult.size() - 1) + "<br><br>" + deptCrewResult;
     }
 
     public String minSalary(Integer deptId) {
@@ -111,7 +111,7 @@ public class EmployeeStreamService {
             return "no personnel hired";
         }
         deptCrewResult.sort(Comparator.comparingInt(employee -> employee.getSalary()));
-        return deptCrewResult.get(0).getSalary() + "<br><br>" + deptCrewResult;
+        return deptCrewResult.get(0) + "<br><br>" + deptCrewResult;
 
     }
 
