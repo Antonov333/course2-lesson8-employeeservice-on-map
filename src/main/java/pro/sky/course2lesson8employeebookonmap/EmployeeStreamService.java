@@ -122,9 +122,7 @@ public class EmployeeStreamService {
             crewSortedByDept = employeeList.stream().sorted().collect(Collectors.toList());
             return crewSortedByDept;
         }
-        List<Employee> deptCrew = employeeList.stream().filter(employee -> {
-                    return employee.isDeptId(dept);
-                }).
+        List<Employee> deptCrew = employeeList.stream().filter(employee -> employee.isDeptId(dept)).
                 collect(Collectors.toList());
         return deptCrew;
     }
