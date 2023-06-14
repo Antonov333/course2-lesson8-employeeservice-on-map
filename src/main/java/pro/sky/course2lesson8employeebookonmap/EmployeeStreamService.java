@@ -78,7 +78,8 @@ public class EmployeeStreamService {
     }
 
     public String welcome() {
-        return "<h2> Course 2, Lesson 9: Stream and Optional<br><br></h2>"
+        return "<h2> Course 2, Lesson 9: Stream and Optional<br><br></h2><br><br>" +
+                "<b>Check Names With StringUtils methods</b>"
                 + "<br><br><a href=\"http://localhost:8080/departments/\"> Departments </a><br><br>" +
                 "<a href=\"http://localhost:8080/departments/example-hire/\"> Hire example persons </a><br>" +
                 "<a href=\"http://localhost:8080/departments/max-salary?departmentId=2\"> Max Salary in Department No.2 </a> |" +
@@ -125,6 +126,12 @@ public class EmployeeStreamService {
         List<Employee> deptCrew = employeeList.stream().filter(employee -> employee.isDeptId(dept)).
                 collect(Collectors.toList());
         return deptCrew;
+    }
+
+    public String checkNames(String firstName, String lastName) {
+        NameCheck nameCheck = new NameCheck(firstName, lastName);
+        return "<h2>checkNames method is under construction </h2><br><br>" +
+                "firstName: " + firstName + "<br><br> lastName: " + lastName + "<br><br>" + nameCheck.getMessage();
     }
 
 }

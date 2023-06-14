@@ -45,4 +45,11 @@ public class EmployeeStreamController {
         return streamService.getDeptCrew(dept);
     }
 
+    @GetMapping(path = "/check-names")
+    public String checkNames(@RequestParam(required = false, name = "first-name") String firstName,
+                             @RequestParam(required = false, name = "last-name") String lastName) {
+        return streamService.checkNames(firstName, lastName);
+    }
+
+
 }

@@ -1,5 +1,8 @@
 package pro.sky.course2lesson8employeebookonmap;
 
+
+import org.apache.commons.lang3.StringUtils;
+
 public class NameCheck {
 
     private final String firstName;
@@ -14,28 +17,34 @@ public class NameCheck {
 
             /*
         0 - OK
-        1 - both null
-        2 - first OK, last null
+        1 - both null or have invalid symbols
+        2 - first OK, last null or have invalid symbols
         3 - first null, last OK
          */
-        if (firstName != null && lastName != null) {
+
+        boolean firstNameOK = StringUtils.isAlpha(firstName);
+
+        boolean lastNameOK = StringUtils.isAlpha(lastName);
+
+        if (firstNameOK & lastNameOK) {
             code = 0;
             message = "OK";
         }
-        if (firstName == null && lastName == null) {
+        if (!firstNameOK & !lastNameOK) {
             code = 1;
-            message = "first and last names are missing";
+            message = "first and last names are missing or containing invalid symbols";
         }
-        if (firstName != null && lastName == null) {
+        if (firstNameOK & !lastNameOK) {
             code = 2;
-            message = "last name is missing";
+            message = "last name is missing or containing invalid symbols";
         }
-        if (firstName == null && lastName != null) {
+        if (!firstNameOK & lastNameOK) {
             code = 3;
-            message = "first name is missing";
+            message = "first name is missing or containing invalid symbols";
         }
         ok = (code == 0);
     }
+
 
     public String getFirstName() {
         return firstName;
