@@ -48,7 +48,11 @@ public class EmployeeStreamController {
     @GetMapping(path = "/check-names")
     public String checkNames(@RequestParam(required = false, name = "first-name") String firstName,
                              @RequestParam(required = false, name = "last-name") String lastName) {
-        return streamService.checkNames(firstName, lastName);
+        try {
+            return streamService.checkNames(firstName, lastName);
+        } catch (WrongNameFormatException wrongNameFormatException) {
+            return wrongNameFormatException.getMessage();
+        }
     }
 
 

@@ -130,8 +130,13 @@ public class EmployeeStreamService {
 
     public String checkNames(String firstName, String lastName) {
         NameCheck nameCheck = new NameCheck(firstName, lastName);
+        if (!nameCheck.isOk()) {
+            throw new WrongNameFormatException(nameCheck.getMessage());
+        }
+        Employee employee = new Employee(firstName, lastName, Status.candidate);
         return "<h2>checkNames method is under construction </h2><br><br>" +
-                "firstName: " + firstName + "<br><br> lastName: " + lastName + "<br><br>" + nameCheck.getMessage();
+                "firstName: " + employee.getFirstName() + "<br><br> lastName: " + employee.getLastName() + "<br><br>"
+                + nameCheck.getMessage();
     }
 
 }

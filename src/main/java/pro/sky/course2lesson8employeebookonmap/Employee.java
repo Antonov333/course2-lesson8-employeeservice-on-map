@@ -1,5 +1,7 @@
 package pro.sky.course2lesson8employeebookonmap;
 
+import org.springframework.util.StringUtils;
+
 import java.util.Objects;
 
 public class Employee implements Comparable<Employee> {
@@ -30,16 +32,16 @@ public class Employee implements Comparable<Employee> {
     }
 
     public Employee(String firstName, String lastName, String status) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName);
+        this.lastName = StringUtils.capitalize(lastName);
         this.status = status;
         this.deptId = 0;
         this.salary = 0;
     }
 
     public Employee(String firstName, String lastName, String status, int deptId, int salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName);
+        this.lastName = StringUtils.capitalize(lastName);
         this.status = status;
         this.deptId = deptId;
         this.salary = salary;

@@ -19,7 +19,7 @@ public class NameCheck {
         0 - OK
         1 - both null or have invalid symbols
         2 - first OK, last null or have invalid symbols
-        3 - first null, last OK
+        3 - first null or have invalid symbols, last OK
          */
 
         boolean firstNameOK = StringUtils.isAlpha(firstName);
